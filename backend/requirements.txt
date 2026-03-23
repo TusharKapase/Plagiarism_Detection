@@ -1,0 +1,10 @@
+flask
+flask-cors
+werkzeug
+numpy
+pandas
+scikit-learn
+python-docx
+PyPDF2
+Levenshtein
+openpyxl
