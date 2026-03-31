@@ -10,3 +10,6 @@ PyPDF2
 Levenshtein
 openpyxl
 reportlab
+sklearn
+Pillow
+pytesseract
