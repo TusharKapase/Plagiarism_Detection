@@ -2,8 +2,8 @@
 import os
 import zipfile
 import uuid
-from utils.similarity import extract_text_from_file, compute_similarity
-from utils.report_generator import generate_excel_report, generate_pdf_report
+from .utils.similarity import extract_text_from_file, compute_similarity
+from .utils.report_generator import generate_excel_report, generate_pdf_report
 
 
 # -------------------- BATCH COMPARISON --------------------

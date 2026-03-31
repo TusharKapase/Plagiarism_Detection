@@ -5,10 +5,10 @@ import os
 import traceback
 
 # Detection logic
-from plagiarism_checker import analyze_submissions, analyze_pairwise
+from .plagiarism_checker import analyze_submissions, analyze_pairwise
 
 # Report generators
-from utils.report_generator import generate_excel_report, generate_pdf_report
+from .utils.report_generator import generate_excel_report, generate_pdf_report
 
 app = Flask(__name__)
 
