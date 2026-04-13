@@ -10,6 +10,6 @@ PyPDF2
 Levenshtein
 openpyxl
 reportlab
-sklearn
+scikit-learn
 Pillow
 pytesseract
