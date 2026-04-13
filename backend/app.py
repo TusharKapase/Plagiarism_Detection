@@ -90,6 +90,11 @@ def pairwise_check():
     except Exception as e:
         traceback.print_exc()
         return jsonify({"error": str(e)}), 500
+    
+
+@app.route("/")
+def home():
+    return {"message": "Plagiarism Backend is Running Successfully"}
 
 
 
