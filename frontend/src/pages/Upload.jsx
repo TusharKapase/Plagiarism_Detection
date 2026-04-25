@@ -13,6 +13,8 @@ import {
 } from "lucide-react";
 import ProgressBar from "../components/ProgressBar";
 
+const API_URL = import.meta.env.VITE_API_URL;
+
 export default function UploadPage() {
 
   const [progress, setProgress] = useState(0);
@@ -43,7 +45,7 @@ export default function UploadPage() {
 
     try {
       setProgress(50);
-      const response = await fetch("http://localhost:5000/api/upload", {
+      const response = await fetch(`${API_URL}/api/upload`, {
         method: "POST",
         body: formData,
       });
@@ -756,7 +758,7 @@ export default function UploadPage() {
               }}
             >
               <a
-                href={`http://localhost:5000/api/download/${result.report_excel}`}
+                href={`${API_URL}/api/download/${result.report_excel}`}
                 style={{
                   textDecoration: "none",
                   padding: "16px 32px",
@@ -776,7 +778,7 @@ export default function UploadPage() {
                 Download Excel Report
               </a>
               <a
-                href={`http://localhost:5000/api/download/${result.report_pdf}`}
+                href={`${API_URL}/api/download/${result.report_pdf}`}
                 style={{
                   textDecoration: "none",
                   padding: "16px 32px",
