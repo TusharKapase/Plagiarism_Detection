@@ -990,7 +990,7 @@ export default function About() {
               }}
             >
               <a
-                href={`http://localhost:5000/api/download/${result.report_excel}`}
+                href={`${API_URL}/api/download/${result.report_excel}`}
                 style={{
                   textDecoration: "none",
                   padding: "16px 32px",
@@ -1022,7 +1022,7 @@ export default function About() {
               </a>
 
               <a
-                href={`http://localhost:5000/api/download/${result.report_pdf}`}
+                href={`${API_URL}/api/download/${result.report_pdf}`}
                 style={{
                   textDecoration: "none",
                   padding: "16px 32px",
