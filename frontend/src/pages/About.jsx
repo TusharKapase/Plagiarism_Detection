@@ -12,6 +12,8 @@ import {
   TrendingUp,
 } from "lucide-react";
 
+const API_URL = import.meta.env.VITE_API_URL;
+
 export default function About() {
   const [file1, setFile1] = useState(null);
   const [file2, setFile2] = useState(null);
@@ -74,7 +76,7 @@ export default function About() {
 
     try {
       setProgress(50);
-      const res = await fetch("http://localhost:5000/api/pairwise", {
+      const res = await fetch(`${API_URL}/api/pairwise`, {
         method: "POST",
         body: formData,
       });
