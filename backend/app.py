@@ -188,18 +188,6 @@ def download_report(filename):
 
 
 # ======================================================
-# DEBUG — check env vars on Render (remove after fix)
-# ======================================================
-@app.route("/api/debug-env", methods=["GET"])
-def debug_env():
-    return jsonify({
-        "EMAIL_USER": os.environ.get("EMAIL_USER", "NOT SET"),
-        "EMAIL_PASS_LEN": len(os.environ.get("EMAIL_PASS", "")),
-        "EMAIL_HOST": os.environ.get("EMAIL_HOST", "NOT SET"),
-    }), 200
-
-
-# ======================================================
 # CONTACT FORM — sends email to team
 # ======================================================
 @app.route("/api/contact", methods=["POST"])
