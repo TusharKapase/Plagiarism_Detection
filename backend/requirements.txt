@@ -13,3 +13,4 @@ reportlab
 scikit-learn
 Pillow
 pytesseract
+python-dotenv
