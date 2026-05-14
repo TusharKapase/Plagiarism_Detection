@@ -18,15 +18,13 @@ def generate_otp():
 def send_otp_email(to_email: str, otp: str) -> bool:
     """
     Send OTP email via SMTP.
-    Reads credentials from environment variables:
-      EMAIL_HOST, EMAIL_PORT, EMAIL_USER, EMAIL_PASS
+    Reads credentials from environment variables.
+    Uses port 465 (SSL) for compatibility with cloud hosts like Render.
     """
     smtp_host = os.environ.get("EMAIL_HOST", "smtp.gmail.com")
-    smtp_port = int(os.environ.get("EMAIL_PORT", 587))
     smtp_user = os.environ.get("EMAIL_USER", "")
     smtp_pass = os.environ.get("EMAIL_PASS", "")
 
-    print(f"[OTP] SMTP Host: {smtp_host}:{smtp_port}")
     print(f"[OTP] EMAIL_USER: {smtp_user}")
     print(f"[OTP] EMAIL_PASS length: {len(smtp_pass)}")
 
@@ -72,16 +70,26 @@ def send_otp_email(to_email: str, otp: str) -> bool:
     msg.attach(MIMEText(html_body, "html"))
 
     try:
-        with smtplib.SMTP(smtp_host, smtp_port, timeout=15) as server:
-            server.ehlo()
-            server.starttls()
+        # Use SMTP_SSL on port 465 — works on Render and most cloud hosts
+        with smtplib.SMTP_SSL(smtp_host, 465, timeout=15) as server:
             server.login(smtp_user, smtp_pass)
             server.sendmail(smtp_user, to_email, msg.as_string())
         print(f"[OTP] Sent OTP to {to_email}")
         return True
     except Exception as e:
-        print(f"[OTP] Failed to send email: {type(e).__name__}: {e}")
-        return False
+        print(f"[OTP] SSL 465 failed: {type(e).__name__}: {e}")
+        # Fallback to STARTTLS port 587
+        try:
+            with smtplib.SMTP(smtp_host, 587, timeout=15) as server:
+                server.ehlo()
+                server.starttls()
+                server.login(smtp_user, smtp_pass)
+                server.sendmail(smtp_user, to_email, msg.as_string())
+            print(f"[OTP] Sent OTP via port 587 to {to_email}")
+            return True
+        except Exception as e2:
+            print(f"[OTP] Both ports failed. 587 error: {type(e2).__name__}: {e2}")
+            return False
 
 
 def store_otp(email: str, otp: str):
